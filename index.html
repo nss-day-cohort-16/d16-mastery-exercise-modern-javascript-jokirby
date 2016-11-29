@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Robot Battle</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/quiz.css">
+</head>
+
+<body>
+	<div id="robot_battle">
+	  <h1>ROBOT BATTLE</h1>
+	</div>
+
+  <div id="main_container" class="container-fluid">
+  	<div id="p1_container">
+	    <h4 id="p1Name" class="navbar-text">Player 1</h4>
+	    <div class="form-group">
+	      <input id="player_one_input" type="text" class="form-control" placeholder="Enter Player Name">
+	    </div>
+	    <select id="dropdown_one" class="form-control">
+	    	<option selected disabled>SELECT ROBOTS</option>
+	      <optgroup label="DRONE">
+			    <option id="Tricopter">Tricopter</option>
+			    <option id="Octocopter">Octocopter</option>
+		    <optgroup label="HUMANOID">
+			    <option id="Bender">Bender</option>
+			    <option>Bernard</option>
+		    <optgroup label="ATV">
+			    <option id="WALLE">WALLE</option>
+			    <option id="Optimus Prime">Optimus Prime</option>
+	     </select>
+	  </div>
+
+
+    <div id="p2_container">
+	    <h4 id="p2Name" class="navbar-text">Player 2</h4>
+	    <div class="form-group">
+	      <input id="player_two_input" type="text" class="form-control" placeholder="Enter Player Name">
+	    </div>
+		      
+	    <select id="dropdown_two" class="form-control">
+	    	<option selected disabled>SELECT ROBOTS</option>
+	      <optgroup label="DRONE">
+			    <option id="Tricopter">Tricopter</option>
+			    <option id="Octocopter">Octocopter</option>
+		    <optgroup label="HUMANOID">
+			    <option id="Bender">Bender</option>
+			    <option>Bernard</option>
+		    <optgroup label="ATV">
+			    <option id="WALLE">WALLE</option>
+			    <option id="Optimus Prime">Optimus Prime</option>
+	    </select>
+    </div>
+  </div><!-- /.container-fluid -->
+
+    
+	<section id="battle-zone">
+		<div id="player_card_1"></div>
+		<div id="player_card_2"></div>
+		<section class="buttons">
+  		<div id="attack_button" class="container">
+		 		<a class="btn btn-5">ATTACK!</a> 
+		  </div>
+		</section>
+	</section>
+<script type="text/javascript" src="javascripts/player.js"></script>
+<script type="text/javascript" src="javascripts/robot-class.js"></script>
+<script type="text/javascript" src="javascripts/quiz.js"></script>
+<!-- <script type="text/javascript" src="javascripts/attack.js"></script> -->
+</body>
+</html>
