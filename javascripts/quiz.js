@@ -110,64 +110,77 @@ playerTwoInput.keyup(function () {rustyRobot.instantAdd2(playerTwoInput.val());}
   $('#p2Name').html(input);
 };
 
-
   //-----------------------------------------[ Adding Player One Card to DOM ]-------------------------------------//
   rustyRobot.addPlayer1ToDom = function () {
+    newPlayerOne.healthWithBonus = newPlayerOne.health + newPlayerOne.class.healthBonus;
+    newPlayerOne.class.overallDamage = newPlayerOne.class.weaponDamage + newPlayerOne.class.strengthBonus;
     console.log(' addPlayersToDom running');
   $('#player_card_1').append(`<div class="card-block">
                             <h5 class="card-text">Class: ${newPlayerOne.class}</h5>
                             <span class="card-text">Weapon: ${newPlayerOne.class.weapon}</span><br>
                             <span class="card-text">Weapon Damage: ${newPlayerOne.class.weaponDamage}</span>
+                            <span class="card-text">Strength Bonus: ${newPlayerOne.class.strengthBonus}</span>
+                            <span class="card-text">Overall Damage: ${newPlayerOne.class.overallDamage}</span>
                             <span class="card-text">Special: ${newPlayerOne.class.special}</span><br>
-                            <span class="card-text playerOneHealth">Health: ${newPlayerOne.health}</span><br>
+                            <span class="card-text playerOneHealth">Health: ${newPlayerOne.healthWithBonus}</span><br>
                             <span class="card-text">Type Aerial: ${newPlayerOne.class.aerial}</span><br>
                             </div><img src="images/bender.gif" alt="Card image">`);
   };
-  //+ newPlayerOne.class.healthBonus
-  //+ newPlayerOne.class.strengthBonus
 
   //-----------------------------------[ Adding Player Two Card to DOM ]------------------------------------//
   rustyRobot.addPlayer2ToDom = function () {
+    newPlayerTwo.healthWithBonus = newPlayerTwo.health + newPlayerTwo.class.healthBonus;
+    newPlayerTwo.class.overallDamage = newPlayerTwo.class.weaponDamage + newPlayerTwo.class.strengthBonus;
   $('#player_card_2').append(`<div class="card-block2">
                             <h5 class="card-text">Class: ${newPlayerTwo.class}</h5><br>
                             <span class="card-text">Weapon: ${newPlayerTwo.class.weapon}</span><br>
                             <span class="card-text">Weapon Damage: ${newPlayerTwo.class.weaponDamage}</span>
+                            <span class="card-text">Strength Bonus: ${newPlayerTwo.class.strengthBonus}</span>
+                            <span class="card-text">Overall Damage: ${newPlayerTwo.class.overallDamage}</span>
                             <span class="card-text">Special: ${newPlayerTwo.class.special}</span><br>
-                            <span class="card-text playerTwoHealth">Health: ${newPlayerTwo.health}</span><br>
-                            <span class="card-text">Type Aerial: ${newPlayerOne.class.aerial}</span><br>
+                            <span class="card-text playerTwoHealth">Health: ${newPlayerTwo.healthWithBonus}</span><br>
+                            <span class="card-text">Type Aerial: ${newPlayerTwo.class.aerial}</span><br>
                             </div><img id="walle" src="images/walle.gif" alt="Card image">`);
   };
-  //+ newPlayerTwo.class.healthBonus
-  //+ newPlayerTwo.class.strengthBonus
 
 //-------------------------------[ ATTACK! ]-----------------------------------//
 $('#attack_button').click(function() {rustyRobot.attack_time();});
 
 
-rustyRobot.attack_time = function() {
-  console.log('attacking!');
-};
-  // let alert,
-    
-  // if (newPlayerOne.health > 0 && newPlayerTwo.health > 0) {
-  //   console.log('fuhrils!');
-  //   newPlayerOne.health = newPlayerOne.health - newPlayerTwo.class.weaponDamage;
-  //   $(".playerOneHealth").html("Health: " + newPlayerOne.health);
+rustyRobot.attack_time = function() {   
+  if (newPlayerOne.healthWithBonus > 0 && newPlayerTwo.healthWithBonus > 0) {
 
-  //   newPlayerTwo.health = newPlayerTwo.health - newPlayerOne.weaponDamage;
-  //   $(".playerTwoHealth").html("Health: " + playerTwoInput.health);
+    //-------[ Player One Attacked By Player Two ]
+    newPlayerOne.healthWithBonus = newPlayerOne.healthWithBonus - newPlayerTwo.class.weaponDamage;
+    $(".playerOneHealth").html("Health: " + newPlayerOne.healthWithBonus);
+    if(newPlayerOne.healthWithBonus <= 0) {
+     alert("K.O.! " + newPlayerTwo.playerName + " wins!");
+      $('#attack_button').unbind().disabled = true;
+      $('#attack_button').hide();
+    }
 
-  //   } else if (newPlayerOne.health <= 0) {
-  //     alert("K.O.! " + newPlayerTwo.name + " wins!");
-  //     $('#attack_button').unbind().disabled = true;
-  //     $('#attack_button').hide();
+    //-------[ Player Two Attacked By Player One ]
+    newPlayerTwo.healthWithBonus = newPlayerTwo.healthWithBonus - newPlayerOne.class.weaponDamage;
+    $(".playerTwoHealth").html("Health: " + newPlayerTwo.healthWithBonus);
+    if(newPlayerTwo.healthWithBonus <= 0) {
+      alert("K.O.! " + newPlayerOne.playerName + " wins!");
+       $('#attack_button').unbind().disabled = true;
+       $('#attack_button').hide();
+    }
 
-  //   } else if (newPlayerTwo.health <= 0) {
-  //     alert("K.O.! " + newPlayerOne.name + " wins!");
-  //      $('#attack_button').unbind().disabled = true;
-  //      $('#attack_button').hide();
-  //   }
-  // };
+    //-------[ PLAYER TWO WINS ]
+    } else if (newPlayerOne.healthWithBonus <= 0) {
+      alert("K.O.! " + newPlayerTwo.playerName + " wins!");
+      $('#attack_button').unbind().disabled = true;
+      $('#attack_button').hide();
+
+    //-------[ PLAYER ONE WINS ]
+    } else if (newPlayerTwo.healthWithBonus <= 0) {
+      alert("K.O.! " + newPlayerOne.playerName + " wins!");
+       $('#attack_button').unbind().disabled = true;
+       $('#attack_button').hide();
+    }
+  };
 
  return rustyRobot;
 
